@@ -59,7 +59,7 @@ class ViewNormal(ttk.Frame):
         self.active_timer = 3               # Felicaカードのセットが継続中タイマー
         self.delay_timer = 0                # 表示遅延タイマー
         self.idm = INVALID_IDM              # IDm
-        self.flg_force_exit = False          # 強制退室処理フラグ(True:処理済 False:未処理)       
+        self.flg_force_exit = True          # 強制退室処理フラグ(True:処理済 False:未処理)       
         
         self.csv = CsvControl()
         # 登録者リストから読込
