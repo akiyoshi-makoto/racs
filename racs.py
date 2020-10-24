@@ -59,7 +59,7 @@ class ViewNormal(ttk.Frame):
         self.active_timer = 3               # Felicaカードのセットが継続中タイマー
         self.delay_timer = 0                # 表示遅延タイマー
         self.idm = INVALID_IDM              # IDm
-        self.flg_force_exit = True          # 強制退室処理フラグ(True:処理済 False:未処理)       
+        self.flg_force_exit = False          # 強制退室処理フラグ(True:処理済 False:未処理)       
         
         self.csv = CsvControl()
         # 登録者リストから読込
@@ -588,7 +588,7 @@ class CsvControl:
         with open(now_time.strftime('%Y-%m') + '.csv', 'a', newline='', encoding='shift_jis') as csvfile:
             file = csv.writer(csvfile)
 
-            for index in len(list):
+            for index in range(len(list)):
                 file.writerow([list[index][0],                  # Felica ID
                                str(list[index][1]),             # 社員No
                                list[index][2],                  # 社員氏名
