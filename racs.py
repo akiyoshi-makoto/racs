@@ -206,14 +206,14 @@ class ViewNormal(ttk.Frame):
     def room_access(self, now_time):
         # 登録済のIDを検索
         is_member = False
-        for member_index in len(self.member_list):
+        for member_index in range(len(self.member_list)):
             if self.idm == self.member_list[member_index][0]:
                 is_member = True
                 break
         
         # 在室者リストを検索
         is_entry = False
-        for entry_index in len(self.entry_list):
+        for entry_index in range(len(self.entry_list)):
             if self.idm == self.entry_list[entry_index][0]:
                 is_entry = True
                 break
@@ -227,9 +227,9 @@ class ViewNormal(ttk.Frame):
                 self.label_msg.config(text=self.member_list[member_index][2] + 'さんが入室しました。')
                 self.csv.write_log(now_time, self.member_list, member_index, 'IN')
                 
-                add_list = [self.member_list[index][0],          # Felica ID
-                            str(self.member_list[index][1]),     # 社員No
-                            self.member_list[index][2],          # 社員氏名
+                add_list = [self.member_list[member_index][0],          # Felica ID
+                            str(self.member_list[member_index][1]),     # 社員No
+                            self.member_list[member_index][2],          # 社員氏名
                            ]
                 self.entry_list.append(add_list)
             # アプリ終了した場合に備えてバックアップを作成しておく
