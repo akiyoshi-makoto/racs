@@ -13,7 +13,7 @@ class ViewAdminList(ttk.Frame):
     def __init__(self, list_kind, master):
         # リスト種別
         self.list_kind = list_kind
-        # Felicaカード読取処理(管理者モード)リトライ回数
+        # Felicaカード読取処理(管理ユーザモード)リトライ回数
         self.read_felica_retry = 0
         # 登録者(在室者)リストから読込
         self.list = csvcontrol.read_list(list_kind)
@@ -143,7 +143,7 @@ class ViewAdminList(ttk.Frame):
                 self.read_felica_retry = 0
 
     ############################################################
-    # 管理者モードにおける登録者リストの更新(追加)
+    # 管理ユーザモードにおける登録者リストの更新(追加)
     ############################################################
     def add_list(self):
         idm = self.entry_idm.get()
@@ -174,7 +174,7 @@ class ViewAdminList(ttk.Frame):
             self.label_err.config(text='追加に成功しました。')
 
     ############################################################
-    # 管理者モードにおける登録者リストの更新(修正)
+    # 管理ユーザモードにおける登録者リストの更新(修正)
     ############################################################
     def chg_list(self):
         idm = self.entry_idm.get()
@@ -204,7 +204,7 @@ class ViewAdminList(ttk.Frame):
 
 
     ############################################################
-    # 管理者モードにおける登録者リストの更新(削除)
+    # 管理ユーザモードにおける登録者リストの更新(削除)
     ############################################################
     def del_list(self):
         idm = self.entry_idm.get()
@@ -230,7 +230,7 @@ class ViewAdminList(ttk.Frame):
             self.label_err.config(text='削除に失敗しました。')
 
     ############################################################
-    # 管理者モードにおける一覧表のリフレッシュ
+    # 管理ユーザモードにおける一覧表のリフレッシュ
     ############################################################
     def refresh_list(self):
         # 一覧表示を更新

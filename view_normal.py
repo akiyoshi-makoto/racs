@@ -51,7 +51,7 @@ class ViewNormal(ttk.Frame):
 
         # 管理ユーザ画面に移動するボタン
         button = ttk.Button(self,
-                            text="管理者モード開始",
+                            text="管理ユーザモード開始",
                             command=lambda: master.switch_view(view_admin.ViewAdmin))
         button.pack(pady=(110,0))
 

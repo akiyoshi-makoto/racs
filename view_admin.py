@@ -29,7 +29,7 @@ class ViewAdmin(ttk.Frame):
         note.bind('<<NotebookTabChanged>>', self.tab_changed)
 
         button = ttk.Button(self,
-                            text='管理者モード終了',
+                            text='管理ユーザモード終了',
                             command=lambda: master.switch_view(view_normal.ViewNormal))
         button.pack(pady=(10,0))
 
