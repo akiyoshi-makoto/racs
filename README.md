@@ -9,7 +9,7 @@ GUIはtkinterを使用しています。
 * Sony PaSoRi RC-S380    
 
 # 全体構成図
-作成中
+![](./images/system_overview.png)
 # 画面イメージ
 ## 通常ユーザモード
 ![](./images/ViewNormal.png)
