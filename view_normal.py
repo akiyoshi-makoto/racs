@@ -36,24 +36,24 @@ class ViewNormal(ttk.Frame):
         ttk.Frame.__init__(self, master)
         self.label_day = ttk.Label(self,
                                    text='',
-                                   font=('', 18))
-        self.label_day.pack(pady=(30,0))
+                                   font=('',50))
+        self.label_day.pack(pady=(10,0))
 
         self.label_tim = ttk.Label(self,
                                    text='',
-                                   font=('', 60))
+                                   font=('', 100))
         self.label_tim.pack()
 
         self.label_msg = ttk.Label(self,
                                    text='',
-                                   font=('',18))
-        self.label_msg.pack(pady=30)
+                                   font=('',30))
+        self.label_msg.pack(pady=10)
 
         # 管理ユーザ画面に移動するボタン
         button = ttk.Button(self,
                             text="管理ユーザモード開始",
                             command=lambda: master.switch_view(view_admin.ViewAdmin))
-        button.pack(pady=(110,0))
+        button.pack(pady=(10,0))
 
     ############################################################
     # 周期処理
