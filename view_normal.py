@@ -36,16 +36,22 @@ class ViewNormal(ttk.Frame):
         ttk.Frame.__init__(self, master)
         self.label_day = ttk.Label(self,
                                    text='',
+                                   #background='red',
+                                   padding=(0,-20,0,-20),
                                    font=('',50))
-        self.label_day.pack(pady=(10,0))
+        self.label_day.pack(pady=(30,0))
 
         self.label_tim = ttk.Label(self,
                                    text='',
-                                   font=('', 100))
+                                   #background='red',
+                                   padding=(0,-30,0,-30),
+                                   font=('', 120))
         self.label_tim.pack()
 
         self.label_msg = ttk.Label(self,
                                    text='',
+                                   #background='red',
+                                   padding=0,
                                    font=('',30))
         self.label_msg.pack(pady=10)
 
@@ -53,7 +59,7 @@ class ViewNormal(ttk.Frame):
         button = ttk.Button(self,
                             text="管理ユーザモード開始",
                             command=lambda: master.switch_view(view_admin.ViewAdmin))
-        button.pack(pady=(10,0))
+        button.pack(pady=(40,0))
 
     ############################################################
     # 周期処理
