@@ -54,10 +54,13 @@ class ViewAdmin(ttk.Frame):
                                              tab.list[index][1],
                                              tab.list[index][2]))
         # テキストボックスをクリア
+        tab.entry_idm.configure(state='normal')
+        tab.entry_num.configure(state='normal')
+        tab.entry_nam.configure(state='normal')
         tab.entry_idm.delete(0,'end')
         tab.entry_num.delete(0,'end')
         tab.entry_nam.delete(0,'end')
-
+ 
         tab.label_err.config(text='')
 
 if __name__ == "__main__":

@@ -18,12 +18,12 @@ class ViewAdminList(ttk.Frame):
         # 登録者(在室者)リストから読込
         self.list = csvcontrol.read_list(list_kind)
         # ウィジットを生成
-        self.create_widgets(list_kind, master)
+        self.create_widgets(master)
         
     ############################################################
     # ウィジットを生成
     ############################################################
-    def create_widgets(self, list_kind, master):
+    def create_widgets(self, master):
         ttk.Frame.__init__(self, master)
         # 一覧表示
         self.tree = ttk.Treeview(self)
@@ -67,19 +67,16 @@ class ViewAdminList(ttk.Frame):
         label_nam = ttk.Label(self, text='社員氏名')
         label_nam.grid(row=3, column=2, padx=5, pady=10)
 
-        idm = StringVar()
-        self.entry_idm = ttk.Entry(self, textvariable=idm, width=18)
+        self.entry_idm = ttk.Entry(self, text='', width=18)
         self.entry_idm.grid(columnspan=2, row=1, column=3, padx=5, sticky=W)
 
-        num = StringVar()
-        self.entry_num = ttk.Entry(self, textvariable=num, width=10)
+        self.entry_num = ttk.Entry(self, text='', width=10)
         self.entry_num.grid(columnspan=2, row=2, column=3, padx=5, sticky=W)
 
-        nam = StringVar()
-        self.entry_nam = ttk.Entry(self, textvariable=nam, width=18)
+        self.entry_nam = ttk.Entry(self, text='', width=18)
         self.entry_nam.grid(columnspan=2, row=3, column=3, padx=5, sticky=W)
-
-        if list_kind == MEMBER_LIST:
+  
+        if self.list_kind == MEMBER_LIST:
             button_read = ttk.Button(self,
                                      text='Felicaから読込',
                                      command=self.read_felica_admin)
@@ -108,6 +105,9 @@ class ViewAdminList(ttk.Frame):
     ############################################################
     def on_tree_select(self, event):
         # テキストボックスを事前にクリア
+        self.entry_idm.configure(state='normal')
+        self.entry_num.configure(state='normal')
+        self.entry_nam.configure(state='normal')
         self.entry_idm.delete(0,'end')
         self.entry_num.delete(0,'end')
         self.entry_nam.delete(0,'end')
@@ -117,6 +117,12 @@ class ViewAdminList(ttk.Frame):
             self.entry_idm.insert('end', item_text[0])
             self.entry_num.insert('end', item_text[1])
             self.entry_nam.insert('end', item_text[2])
+
+        # 在室者管理の場合は読み取り専用にする
+        if self.list_kind == ENTRY_LIST:
+            self.entry_idm.configure(state='readonly')
+            self.entry_num.configure(state='readonly')
+            self.entry_nam.configure(state='readonly')
 
         self.label_err.config(text='')
 
