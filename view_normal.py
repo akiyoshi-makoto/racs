@@ -5,6 +5,7 @@ from tkinter import ttk
 from const import *
 import datetime
 import csvcontrol
+import subprocess
 import felica
 import view_admin
 
@@ -17,7 +18,8 @@ class ViewNormal(ttk.Frame):
         self.delay_timer = 0                # 表示遅延タイマー
         self.idm = INVALID_IDM              # IDm
         self.flg_force_exit = True          # 強制退室処理フラグ(True:処理済 False:未処理)       
-        
+        self.sound_effect = 'NONE'          # 効果音種別
+
         # 登録者リストから読込
         self.member_list = csvcontrol.read_list(MEMBER_LIST)
         # print(self.member_list)     # for debug
@@ -69,15 +71,17 @@ class ViewNormal(ttk.Frame):
         now_time = self.disp_now_time()
         # 強制退室処理
         self.force_exit(now_time)
+        # 効果音処理
+        self.make_sound_effect()
         # Felicaカード読込処理
         idm = felica.read_felica()
         # Felicaカードタッチ判定
         if self.touch_felica(idm):
             # 入退室判定処理
             self.room_access(now_time)
-        
+ 
         # 周期処理の実現
-        self.after(1000,self.cycle_proc)
+        self.after(500,self.cycle_proc)
 
     ############################################################
     # 現在時刻表示
@@ -183,6 +187,7 @@ class ViewNormal(ttk.Frame):
                 self.label_msg.config(text=self.member_list[member_index][2] + 'さんが退室しました。')
                 csvcontrol.write_log(now_time, self.member_list, member_index, 'OUT')
                 del self.entry_list[entry_index]
+                self.sound_effect = 'OUT'
             else:
                 self.label_msg.config(text=self.member_list[member_index][2] + 'さんが入室しました。')
                 csvcontrol.write_log(now_time, self.member_list, member_index, 'IN')
@@ -192,6 +197,7 @@ class ViewNormal(ttk.Frame):
                             self.member_list[member_index][2],          # 社員氏名
                            ]
                 self.entry_list.append(add_list)
+                self.sound_effect = 'IN'
             # アプリ終了した場合に備えてバックアップを作成しておく
             csvcontrol.write_list(self.entry_list, ENTRY_LIST)
         else:
@@ -202,6 +208,22 @@ class ViewNormal(ttk.Frame):
                 csvcontrol.write_list(self.entry_list, ENTRY_LIST)
             else:
                 self.label_msg.config(text='未登録カードです。カードを登録してください。')
+            self.sound_effect = 'ERROR'
+
+    ############################################################
+    # 効果音処理
+    ############################################################
+    def make_sound_effect(self):
+        if self.sound_effect == 'IN':
+            subprocess.run("aplay sounds/access_ok.wav", shell=True)
+        elif self.sound_effect == 'OUT':
+            subprocess.run("aplay sounds/access_ok.wav", shell=True)
+        elif self.sound_effect == 'ERROR':
+            subprocess.run("aplay sounds/access_ng.wav", shell=True)
+        else:
+            pass
+        self.sound_effect = 'NONE'
+
 
 if __name__ == "__main__":
     root = Tk()
