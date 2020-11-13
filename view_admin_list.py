@@ -5,6 +5,7 @@ from tkinter import ttk
 from const import *
 import csvcontrol
 import felica
+import tkinter.messagebox as messagebox
 
 ############################################################
 # 管理ユーザ画面(一覧表示)
@@ -226,12 +227,13 @@ class ViewAdminList(ttk.Frame):
                         break
 
         if is_exec:
-            del self.list[index]
+            ret = messagebox.askyesno('確認', '本当に削除してよいですか?')
+            if ret == True:
+                del self.list[index]
+                # 一覧表のリフレッシュ
+                self.refresh_list()
 
-            # 一覧表のリフレッシュ
-            self.refresh_list()
-
-            self.label_err.config(text='削除に成功しました。')
+                self.label_err.config(text='削除に成功しました。')
         else:
             self.label_err.config(text='削除に失敗しました。')
 
