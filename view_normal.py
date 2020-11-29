@@ -214,11 +214,11 @@ class ViewNormal(ttk.Frame):
     ############################################################
     def make_sound_effect(self):
         if self.sound_effect == 'IN':
-            subprocess.run("aplay sounds/access_ok.wav", shell=True)
+            subprocess.call('mpg321 sounds/ok.mp3', shell=True)
         elif self.sound_effect == 'OUT':
-            subprocess.run("aplay sounds/access_ok.wav", shell=True)
+            subprocess.call('mpg321 sounds/ok.mp3', shell=True)
         elif self.sound_effect == 'ERROR':
-            subprocess.run("aplay sounds/access_ng.wav", shell=True)
+            subprocess.call('mpg321 sounds/error.mp3', shell=True)
         else:
             pass
         self.sound_effect = 'NONE'
