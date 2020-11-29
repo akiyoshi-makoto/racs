@@ -8,8 +8,9 @@ import nfc
 def read_felica():
     # for debug
     clf = nfc.ContactlessFrontend('usb')
-    target = nfc.clf.RemoteTarget('212F')   # Felica
-    res = clf.sense(target)
+    res = clf.sense(nfc.clf.RemoteTarget('106A'),   # Type A
+                    nfc.clf.RemoteTarget('106B'),   # Type B
+                    nfc.clf.RemoteTarget('212F'))   # Felica
 
     # Felicaカード読込成功
     if not res is None:
